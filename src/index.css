@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+
+:root { color-scheme: light; }
+html, body, #root { height: 100%; }
+body { margin: 0; }
+
+
+/* ---------------------------------- */
+/* Fancy micro-animations and helpers */
+/* ---------------------------------- */
+@keyframes shiny {
+0% { transform: translateX(-100%); }
+100% { transform: translateX(200%); }
+}
+
+
+@keyframes blobFloat {
+0%, 100% { transform: translate(0,0) scale(1); }
+50% { transform: translate(10px, -20px) scale(1.05); }
+}
+
+
+/* Snowfall: fall on Y + drift on X (via margin) */
+@keyframes snow-fall { 0% { transform: translateY(-5%); } 100% { transform: translateY(110vh); } }
+@keyframes snow-drift { 0%,100% { margin-left: 0; } 50% { margin-left: 32px; } }
+.snowflake { position:absolute; top:-2rem; pointer-events:none; user-select:none; will-change: transform, margin-left; }
+
+
+/* Modal fade/scale utilities (used by Lightbox) */
+@keyframes fade-in { from { opacity: 0 } to { opacity: 1 } }
+@keyframes scale-in { from { transform: scale(.96) } to { transform: scale(1) } }
+
+
+/* Subtle gradient border for cards */
+.card-gradient { position: relative; }
+.card-gradient::before { content: ""; position: absolute; inset: 0; border-radius: 1.25rem; padding: 1px;
+background: linear-gradient(120deg, rgba(16,185,129,.28), rgba(34,197,94,.28), rgba(59,130,246,.22));
+-webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+-webkit-mask-composite: xor; mask-composite: exclude; pointer-events:none; }
