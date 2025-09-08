@@ -18,7 +18,6 @@ export default function Footer() {
           <h4 className="font-semibold">Brzi linkovi</h4>
           <ul className="mt-3 space-y-2 text-sm text-gray-700">
             <li><NavLink to="/trening" className="hover:underline">OCC Treninzi</NavLink></li>
-            <li><NavLink to="/volonteri" className="hover:underline">Volontiranje</NavLink></li>
             <li><NavLink to="/kontakt" className="hover:underline">Kontakt</NavLink></li>
           </ul>
         </div>
