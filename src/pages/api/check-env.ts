@@ -9,3 +9,4 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     CONTACT_TO: process.env.CONTACT_TO || null,
   });
 }
+
