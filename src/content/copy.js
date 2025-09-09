@@ -15,5 +15,5 @@ export const copy = {
     ],
     donateTitle: "Podrži donacijom",
     donateText: "Ako nemaš vremena za pakovanje, možeš podržati nabavku poklona i logistiku.",
-    contactMail: "nikolic.milos86@gmail.com",
+    contactMail: "info@operacijabozicnodete.com",
 };

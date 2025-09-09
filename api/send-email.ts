@@ -14,7 +14,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const resend = new Resend(key);
     const from = process.env.CONTACT_FROM || "Operacija Božićno Dete <onboarding@resend.dev>";
-    const to = process.env.CONTACT_TO || "nikolic.milos86@gmail.com";
+    const to = process.env.CONTACT_TO || "info@operacijabozicnodete.com";
 
     const { data, error } = await resend.emails.send({
       from,
