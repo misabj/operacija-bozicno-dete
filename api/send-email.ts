@@ -14,7 +14,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const resend = new Resend(apiKey);
 
   // Obavezno: koristi From koji SIGURNO prolazi bez verifikacije domena
-  const from = process.env.CONTACT_FROM || "Operacija Božićno Dete <onboarding@resend.dev>";
+  const from = process.env.CONTACT_FROM || "Operacija Božićno Dete <kontakt@operacijabozicnodete.com>";
   const to = process.env.CONTACT_TO || "nikolic.milos86@gmail.com"; // po želji promeni
 
   try {
