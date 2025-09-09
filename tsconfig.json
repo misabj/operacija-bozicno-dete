@@ -11,5 +11,5 @@
     "baseUrl": ".",
      "noEmit": true
   },
-  "include": ["src", "src/pages/api", "vite-env.d.ts"]  // ← DODAJ "api"
+  "include": ["src", "api", "vite-env.d.ts"]  // ← DODAJ "api"
 }
