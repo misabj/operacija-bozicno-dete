@@ -36,21 +36,32 @@ export default function Kontakt() {
 
     setState("sending");
     try {
-        const url = new URL("/api/send-email", window.location.origin).toString();
-        const res = await fetch(url, {
+      const res = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify(form),
-        });
-      const data = await res.json();
-      if (!res.ok || !data.ok) {
-        throw new Error(data?.error || "Greška pri slanju");
+      });
+
+      // pokuša JSON, a ako nije JSON – vratimo plain text
+      let data: any = null;
+      try {
+        data = await res.json();
+      } catch {
+        const text = await res.text().catch(() => "");
+        if (!res.ok) throw new Error(text || `${res.status} ${res.statusText}`);
       }
+
+      if (!res.ok || !data?.ok) {
+        const raw = data?.error ?? data?.message ?? `${res.status} ${res.statusText}`;
+        const msg = typeof raw === "string" ? raw : JSON.stringify(raw);
+        throw new Error(msg);
+      }
+
       setState("sent");
       setForm({ name: "", email: "", subject: "", message: "", honeypot: "" });
     } catch (err: any) {
       setState("error");
-      setError(err?.message || "Greška pri slanju");
+      setError(err?.message ?? "Greška pri slanju");
     }
   };
 
@@ -61,7 +72,15 @@ export default function Kontakt() {
         <div className="rounded-3xl border bg-white p-6 shadow-sm card-gradient">
           <form onSubmit={onSubmit} className="space-y-4">
             {/* honeypot (ne dirati) */}
-            <input type="text" name="honeypot" value={form.honeypot} onChange={onChange} className="hidden" tabIndex={-1} autoComplete="off" />
+            <input
+              type="text"
+              name="honeypot"
+              value={form.honeypot}
+              onChange={onChange}
+              className="hidden"
+              tabIndex={-1}
+              autoComplete="off"
+            />
 
             <div className="grid gap-3 sm:grid-cols-2">
               <div>
@@ -84,7 +103,7 @@ export default function Kontakt() {
                   onChange={onChange}
                   required
                   className="mt-1 w-full rounded-xl border px-3 py-2 outline-none focus:ring-2 focus:ring-emerald-400"
-                  placeholder="vaš@email.com"
+                  placeholder="vas@email.com"
                 />
               </div>
             </div>
@@ -135,7 +154,9 @@ export default function Kontakt() {
               </div>
             )}
 
-            <p className="text-xs text-gray-500">Možeš i direktno: <a className="underline" href={`mailto:${copy.contactMail}`}>{copy.contactMail}</a></p>
+            <p className="text-xs text-gray-500">
+              Možeš i direktno: <a className="underline" href={`mailto:${copy.contactMail}`}>{copy.contactMail}</a>
+            </p>
           </form>
         </div>
 
