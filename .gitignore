@@ -27,3 +27,5 @@ dist-ssr
 
 api/*.js
 api/*.map
+.env.local
+.env*.local
